@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1 {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    border-radius: 10px;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+form {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px;
+    background-color: #fff;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+}
+
+input[type="text"], input[type="time"], input[type="submit"] {
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #555;
+}
+
+/* Estilos adicionais para o botão de PDF */
+button {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #ddd;
+
+}
+
+button:hover {
+    background-color: #555;
+}
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}
+.quadrado{
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Estilos para os botões */
+button {
+margin-top: 10px;
+}

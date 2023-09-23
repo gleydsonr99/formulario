@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <title>Ordenar Registros</title>
+     
+</head>
+<body>
+    <h1>Ordenar Registros</h1>
+    <div class="quadrado">
+    <h2>Alunos</h2>
+    <form id="alunoForm">
+        <input type="text" id="nomeInput" placeholder="Nome">
+        <input type="text" id="faculdadeInput" placeholder="Faculdade">
+        <input type="time" id="horarioInput1" placeholder="Horário 1">
+        <input type="time" id="horarioInput2" placeholder="Horário 2">
+        <input type="submit" value="Adicionar" onclick="adicionarAluno()">
+    </form>
+
+    <table id="alunosTable">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Faculdade</th>
+                <th>Horário 1</th>
+                <th>Horário 2</th>
+            </tr>
+        </thead>
+        <tbody id="alunosBody">
+            <!-- Registros de alunos serão adicionados dinamicamente aqui -->
+        </tbody>
+    </table>
+
+    <h2>Caronas</h2>
+    <form id="caronaForm">
+        <input type="text" id="nomeInputCarona" placeholder="Nome">
+        <input type="text" id="destinoInput" placeholder="Destino da Carona">
+        <!-- Adicione um campo "Ida/Volta" -->
+        <select id="idaVoltaInput">
+            <option value="ida">Vai</option>
+            <option value="volta">Volta</option>
+        </select>
+        <input type="submit" value="Adicionar" onclick="adicionarCarona()">
+    </form>
+
+    <table id="caronasTable">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Destino</th>
+                <th>vai/Volta</th>
+            </tr>
+        </thead>
+        <tbody id="caronasBody">
+            <!-- Registros de caronas serão adicionados dinamicamente aqui -->
+        </tbody>
+    </table>
+
+    <button onclick="imprimirPagina()">Imprimir Página</button>
+    <button onclick="gerarPDF()">Gerar PDF</button>
+    </div>
+    <script>
+        let alunos = [];
+        let caronas = [];
+
+        function adicionarAluno() {
+            const nome = document.getElementById("nomeInput").value;
+            const faculdade = document.getElementById("faculdadeInput").value;
+            const horario1 = document.getElementById("horarioInput1").value;
+            const horario2 = document.getElementById("horarioInput2").value;
+
+            alunos.push({ nome, faculdade, horario1, horario2 });
+            exibirAlunos();
+            event.preventDefault(); // previne o envio do formulário
+        }
+
+        function adicionarCarona() {
+            const nomeCarona = document.getElementById("nomeInputCarona").value;
+            const destino = document.getElementById("destinoInput").value;
+            const idaVolta = document.getElementById("idaVoltaInput").value;
+
+            caronas.push({ nome: nomeCarona, destino, idaVolta });
+            exibirCaronas();
+            event.preventDefault(); // previne o envio do formulário
+        }
+
+        function exibirAlunos() {
+            const tabela = document.getElementById("alunosBody");
+            tabela.innerHTML = ""; // limpa a tabela antes de exibir os registros novamente
+
+            alunos.forEach((aluno) => {
+                const row = tabela.insertRow();
+                const nomeCell = row.insertCell();
+                const faculdadeCell = row.insertCell();
+                const horario1Cell = row.insertCell();
+                const horario2Cell = row.insertCell();
+
+                nomeCell.innerText = aluno.nome;
+                faculdadeCell.innerText = aluno.faculdade;
+                horario1Cell.innerText = aluno.horario1;
+                horario2Cell.innerText = aluno.horario2;
+            });
+        }
+
+        function exibirCaronas() {
+            const tabela = document.getElementById("caronasBody");
+            tabela.innerHTML = ""; // limpa a tabela antes de exibir os registros novamente
+
+            caronas.forEach((carona) => {
+                const row = tabela.insertRow();
+                const nomeCell = row.insertCell();
+                const destinoCell = row.insertCell();
+                const idaVoltaCell = row.insertCell();
+
+                nomeCell.innerText = carona.nome;
+                destinoCell.innerText = carona.destino;
+                idaVoltaCell.innerText = carona.idaVolta;
+            });
+        }
+
+        function imprimirPagina() {
+            window.print();
+        }
+
+        function gerarPDF() {
+            const elementoParaPDF = document.body;
+
+            const pdfConfig = {
+                margin: 10,
+                filename: 'documento.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf()
+                .from(elementoParaPDF)
+                .set(pdfConfig)
+                .outputPdf()
+                .then(function(pdf) {
+                    // Baixe o PDF gerado
+                    pdf.save();
+                });
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
